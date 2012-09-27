@@ -16,26 +16,23 @@ import com.hadoop.compression.lzo.LzopCodec;
 import com.jd.ipc.forecasting.hdfs.archiver.service.IOutputService;
 
 enum CompressCode {
-	GZ, gz, LZO, lzo, BZ2, bz2;
+	GZ, LZO, BZ2;
 	static CompressionCodec getCodeInstance(String code) {
 		if (code == null || code.isEmpty())
 			return null;
 		CompressionCodec codec = null;
-		switch (CompressCode.valueOf(code)) {
+		switch (CompressCode.valueOf(code.toUpperCase())) {
 		case GZ:
-		case gz:
 			GzipCodec gzCodec = new GzipCodec();
 			gzCodec.setConf(new Configuration());
 			codec = gzCodec;
 			break;
 		case LZO:
-		case lzo:
 			LzopCodec lzoCodec = new LzopCodec();
 			lzoCodec.setConf(new Configuration());
 			codec = lzoCodec;
 			break;
 		case BZ2:
-		case bz2:
 			BZip2Codec bz2Codec = new BZip2Codec();
 			codec = bz2Codec;
 			break;

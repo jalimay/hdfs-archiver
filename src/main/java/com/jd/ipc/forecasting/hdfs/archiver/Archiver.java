@@ -25,7 +25,7 @@ public class Archiver {
 		int buffSize = 1024 * 1024;
 
 		ArchiveParam(String[] args) {
-			if (args.length == 1 && args[0].trim().equalsIgnoreCase("-h")) {
+			if (args.length == 0 || (args.length == 1 && args[0].trim().equalsIgnoreCase("-h"))) {
 				System.out.println("Example: java -jar xxx.jar [BuffSize] [FsPath] [SrcDir] [DstDir] [CompressCode]");
 				System.exit(1);
 			} else if (args.length >= 4) {
@@ -35,8 +35,6 @@ public class Archiver {
 				dstDir = args[3].trim();
 				if (args.length >= 5)
 					codeClass = args[4].trim();
-			} else {
-				throw new RuntimeException("Not enough arguments");
 			}
 			validate();
 		}
